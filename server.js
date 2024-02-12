@@ -2,7 +2,7 @@
 import express from "express"
 import fs from "fs"
 import path from "path"
-import router from "./router.js"
+import router from "./router/router"
 const app = express();
 app.use(express.static(path.resolve('./', "build")));
 app.use(router)
