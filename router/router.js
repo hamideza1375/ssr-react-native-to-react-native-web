@@ -4,6 +4,7 @@ import fs from "fs"
 import path from "path"
 import { renderToString } from "react-dom/server"
 import { Helmet } from 'react-helmet';
+import NavigationContainer from "@react-navigation/native/lib/commonjs/NavigationContainer"
 import ServerContainer from "@react-navigation/native/lib/commonjs/ServerContainer"
 
 import Home from "../components/Home"
@@ -16,7 +17,9 @@ const indexPath = appRoot("../build/index.html")
 function Application(Component, req, res, next) {
   let html = renderToString(
     <ServerContainer location={{ pathname: req.url, search: req.query }}  >
+      <NavigationContainer>
       <Component />
+    </NavigationContainer>
     </ServerContainer>
   )
   const helmet = Helmet.renderStatic()
