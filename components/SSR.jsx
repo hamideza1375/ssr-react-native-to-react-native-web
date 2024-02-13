@@ -9,14 +9,13 @@ import useNavigation from "@react-navigation/core/lib/commonjs/useNavigation"
 const SSR = () => {
 	const [first, setfirst] = useState()
 
-	// const route = useRoute(); // useRoute خطا مسده
+	// const route = useRoute(); // useRoute خطا میده
 	const navigation = useNavigation();
 	const linkTo = useLinkTo();
 
 	useFocusEffect(useCallback(() => {
-
 	}, []))
-
+	
 	return (
 		<div className="application">
 			<Helmet>
@@ -27,7 +26,7 @@ const SSR = () => {
 
 			<View>
 				<Text style={{ cursor: 'pointer' }} onClick={() => linkTo('/home')} >SSR SSR SSR</Text>
-				<Text>SSR SSR SSR</Text>
+				<Text style={{color:'red'}} >SSR SSR SSR</Text>
 			</View>
 		</div>
 	)

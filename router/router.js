@@ -7,18 +7,17 @@ import { Helmet } from 'react-helmet';
 import NavigationContainer from "@react-navigation/native/lib/commonjs/NavigationContainer"
 import ServerContainer from "@react-navigation/native/lib/commonjs/ServerContainer"
 
-import Home from "../components/Home"
-import SSR from "../components/SSR"
+import App from "../components/App"
 
 const appRoot = (pathName) => path.join(__dirname, pathName)
 const indexPath = appRoot("../build/index.html")
 
 
-function Application(Component, req, res, next) {
+function Application(req, res, next) {
   let html = renderToString(
     <ServerContainer location={{ pathname: req.url, search: req.query }}  >
       <NavigationContainer>
-      <Component />
+      <App url={req.url} />
     </NavigationContainer>
     </ServerContainer>
   )
@@ -36,12 +35,12 @@ function Application(Component, req, res, next) {
 
 
 router.get('/home', (req, res, next) => {
-  Application(Home, req, res, next)
+  Application(req, res, next)
 });
 
 
 router.get('/ssr', (req, res, next) => {
-  Application(SSR, req, res, next)
+  Application(req, res, next)
 });
 
 

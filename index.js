@@ -1,6 +1,5 @@
 // global.__DEV__ = true
 
-
 require('@babel/register')({
   ignore: [/(node_module)/],
   presets: ['module:metro-react-native-babel-preset'],
@@ -10,7 +9,6 @@ require('@babel/register')({
       "root": ["."],
       "alias": {
         "react-native": "react-native-web",
-        // "@react-navigation/native": "@react-navigation/native/lib/commonjs",
       }
     }],
   ],
