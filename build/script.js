@@ -1,2 +1,0 @@
-if(document.getElementsByClassName('css-text-1rynq56')[0]?.innerText == 'SSR SSR SSR') document.getElementsByClassName('css-text-1rynq56')[0].onclick=()=>navigation.navigate("/home")
-document.body.append('page')

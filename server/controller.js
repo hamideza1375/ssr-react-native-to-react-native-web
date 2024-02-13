@@ -5,22 +5,20 @@ import path from "path"
 import { renderToString } from "react-dom/server"
 import { Helmet } from 'react-helmet';
 import NavigationContainer from "@react-navigation/native/lib/commonjs/NavigationContainer"
-import ServerContainer from "@react-navigation/native/lib/commonjs/ServerContainer"
 
-import App from "../components/App"
+import App from "./App"
 
 const appRoot = (pathName) => path.join(__dirname, pathName)
 const indexPath = appRoot("../build/index.html")
 
-
-function Application(req, res, next) {
+module.exports = function Application(req, res, next) {
+  const location = new URL(req.url, 'http:localhost:3001')
   let html = renderToString(
-    <ServerContainer location={{ pathname: req.url, search: req.query }}  >
-      <NavigationContainer>
-      <App url={req.url} />
+    <NavigationContainer>
+      <App location={location} />
     </NavigationContainer>
-    </ServerContainer>
   )
+
   const helmet = Helmet.renderStatic()
   let index = fs.readFileSync(indexPath, "utf8")
   return res.send(
@@ -31,17 +29,5 @@ function Application(req, res, next) {
       .replace("</head>", `${helmet.title.toString()}</head>`)
   )
 }
-
-
-
-router.get('/home', (req, res, next) => {
-  Application(req, res, next)
-});
-
-
-router.get('/ssr', (req, res, next) => {
-  Application(req, res, next)
-});
-
 
 export default router
